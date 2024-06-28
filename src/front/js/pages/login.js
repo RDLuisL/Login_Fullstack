@@ -1,12 +1,8 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
-
-
-
-
 
 
 export const Login = () => {
@@ -15,13 +11,15 @@ export const Login = () => {
     /*Controler Component*/
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const history = useHistory();
+    const navigate = useNavigate();
     const token = sessionStorage.getItem("token");
     console.log("This is your token", token);
 
     const handleClick = () => {
         actions.Login(email, password).then(() => {
-            history.push("/")
+            navigate("/")
+            //Navigate es para indicar a que ruta va a ir el navegador cuando el acton del Login  verifique que coinciden 
+            //email y password
         })
     }
 
