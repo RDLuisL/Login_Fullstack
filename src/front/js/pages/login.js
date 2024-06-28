@@ -17,9 +17,9 @@ export const Login = () => {
 
     const handleClick = () => {
         actions.Login(email, password).then(() => {
-            navigate("/")
+            navigate("/demo")
             //Navigate es para indicar a que ruta va a ir el navegador cuando el acton del Login  verifique que coinciden 
-            //email y password
+            //email y password. En este caso lo envio a /demo
         })
     }
 
