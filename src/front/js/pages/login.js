@@ -4,6 +4,7 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
 
 
+
 export const Login = () => {
     const { store, actions } = useContext(Context);
 
@@ -23,14 +24,14 @@ export const Login = () => {
             })
         };
 
-        fetch('https://3001-rdluisl-pruebabanckend-lizqov5a68i.ws-us114.gitpod.io/token', opts)
+        fetch('https://3001-rdluisl-pruebabanckend-lizqov5a68i.ws-us114.gitpod.io/api/token', opts)
             .then(resp => {
                 if (resp.status === 200) return resp.json();
                 else alert("There has been some error")
             })
             .then()
             .catch(error => {
-                console.error("there was an error!!, error")
+                console.error("there was an error!!, error", error);
             })
     }
 
