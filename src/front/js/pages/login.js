@@ -1,7 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Context } from "../store/appContext";
+import { useHistory } from "react-router";
 import rigoImageUrl from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
+
 
 
 
@@ -13,39 +15,23 @@ export const Login = () => {
     /*Controler Component*/
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const history = useHistory();
     const token = sessionStorage.getItem("token");
+    console.log("This is your token", token);
 
     const handleClick = () => {
-        const opts = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email: email,
-                password: password
-            })
-        };
-
-        fetch('https://3001-rdluisl-pruebabackend-8w3ao2j7exp.ws-us114.gitpod.io/api/token', opts)
-            .then(resp => {
-                if (resp.status === 200) return resp.json();
-                else alert("There has been some error")
-            })
-            .then(data => {
-                console.log("this came from the backend", data)
-                sessionStorage.setItem("token", data.access_token);
-            })
-            .catch(error => {
-                console.error("there was an error!!, error", error);
-            })
+        actions.Login(email, password).then(() => {
+            history.push("/")
+        })
     }
 
     return (
         <div className="text-center mt-5">
             <h1>Login</h1>
             <div>
-                {(token && token != "" && token != undefined) ? "You are logged in with this token: " + token :
+                {(token && token != "" && token != undefined) ? (
+                    "You are logged in with this token: " + token
+                ) : (
                     <div>
                         <input type="test" placeholder="escribe el email" value={email} onChange={(e) => setEmail(e.target.value)} />
                         {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
@@ -58,7 +44,7 @@ export const Login = () => {
                         {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
                         <button onClick={handleClick}> Login</button>
                     </div>
-                }
+                )}
             </div >
 
         </div >
