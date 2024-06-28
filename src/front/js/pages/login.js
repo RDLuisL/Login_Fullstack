@@ -11,6 +11,7 @@ export const Login = () => {
     /*Controler Component*/
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const token = sessionStorage.getItem("token");
 
     const handleClick = () => {
         const opts = {
@@ -29,7 +30,10 @@ export const Login = () => {
                 if (resp.status === 200) return resp.json();
                 else alert("There has been some error")
             })
-            .then()
+            .then(data => {
+                console.log("this came from the backend", data)
+                seccionStorage.setItem("token", data.access_token);
+            })
             .catch(error => {
                 console.error("there was an error!!, error", error);
             })
@@ -39,10 +43,19 @@ export const Login = () => {
         <div className="text-center mt-5">
             <h1>Login</h1>
             <div>
-                <input type="test" placeholder="escribe el email" value={email} onChange={(e) => setEmail(e.target.value)} /> {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
-                <input type="password" placeholder="escribe el password" value={password} onChange={(e) => setPassword(e.target.value)} /> {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
-                <button onClick={handleClick}> Login</button >
+                {(token && token != "" && token != undefined) ? "You are logged in with this token" + token :
+
+                    <input type="test" placeholder="escribe el email" value={email} onChange={(e) => setEmail(e.target.value)} /> {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
+                <input
+                    type="password"
+                    placeholder="escribe el password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                /* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */
+                <button onClick={handleClick}> Login</button>
             </div >
+                }
         </div >
     );
 };
