@@ -23,6 +23,8 @@ export const Login = () => {
         })
     }
 
+    //if (store.token && store.token != "" && store.token != undefined) navigate.push("/demo");
+
     return (
         <div className="text-center mt-5">
             <h1>Login</h1>
