@@ -1,0 +1,14 @@
+.contenedor {
+  text-align: center; /* Centro la imagen horizontalmente */
+  height: 100vh; /* Altura completa de la ventana */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+}
+
+img {
+  display: block; /* Para que `margin: auto` funcione correctamente */
+  max-width: 25%; /* Reduce el tamaño a una cuarta parte */
+  height: auto; /* Mantiene la proporción de la imagen */
+}
