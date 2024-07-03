@@ -28,4 +28,11 @@ def create_token():
     access_token = create_access_token(identity=email)
     return jsonify(access_token=access_token)
 
-
+@api.route("/authenticate", methods=["GET"])
+@jwt_required
+def authenticate_token():
+    email = get_jwt_identity() 
+    if email == 'test' : 
+        return jsonify ({'Token' : 'valido'})
+    else : 
+        return jsonify ({'Token' : 'no valido'})

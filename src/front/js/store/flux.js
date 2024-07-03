@@ -23,36 +23,33 @@ const getState = ({ getStore, getActions, setStore }) => {
 			},
 
 			Login: async (email, password) => {
-				const store = getStore()
-				const handleClick = async () => {
-					const opts = {
-						method: "POST",
-						headers: {
-							"Content-Type": "application/json"
-						},
-						body: JSON.stringify({
-							email: email,
-							password: password
-						})
-					};
-
-					try {
-						const resp = await fetch('https://3001-rdluisl-pruebabackend-8w3ao2j7exp.ws-us114.gitpod.io/api/token', opts)
-						if (resp.status !== 200) {
-							alert("There has been some error");
-							return false;
-						}
-
-						const data = await resp.json();
-						console.log("this came from backend", data);
-						sessionStorage.setItem("token", data.access_token);
-						setStore({ token: data.access_token })
-						return true;
-					}
-					catch (error) {
-						console.error("There has been an error login in")
-					}
+				const opts = {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					body: JSON.stringify({
+						email: email,
+						password: password
+					})
 				};
+
+				try {
+					const resp = await fetch('https://3001-rdluisl-loginfullstack-9ykenyago7b.ws-us115.gitpod.io/api/token', opts)
+					if (resp.status !== 200) {
+						return false;
+					}
+
+					const data = await resp.json();
+					console.log("this came from backend", data);
+					sessionStorage.setItem("token", data.access_token);
+					setStore({ token: data.access_token })
+					return true;
+				}
+				catch (error) {
+					console.error("There has been an error login in")
+				}
+
 
 				//we have to loop the entire demo array to look for the respective index
 				//and change its color

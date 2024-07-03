@@ -16,10 +16,18 @@ export const Login = () => {
     console.log("This is your token", token);
 
     const handleClick = () => {
-        actions.Login(email, password).then(() => {
-            navigate("/demo")
+        actions.Login(email, password).then((response) => {
+            if (response == true) {
+                navigate("/demo")
+            }
+            else {
+                alert('correo o password equivocado')
+            }
+
             //Navigate es para indicar a que ruta va a ir el navegador cuando el acton del Login  verifique que coinciden 
             //email y password. En este caso lo envio a /demo
+
+
         })
     }
 
@@ -29,24 +37,19 @@ export const Login = () => {
         <div className="text-center mt-5">
             <h1>Login</h1>
             <div>
-                {(token && token != "" && token != undefined) ? (
-                    "You are logged in with this token: " + token
-                ) : (
-                    <div>
-                        <input type="test" placeholder="escribe el email" value={email} onChange={(e) => setEmail(e.target.value)} />
-                        {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
-                        <input
-                            type="password"
-                            placeholder="escribe el password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                        />
-                        {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
-                        <button onClick={handleClick}> Login</button>
-                    </div>
-                )}
+                <input type="test" placeholder="escribe el email" value={email} onChange={(e) => setEmail(e.target.value)} />
+                {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
+                <input
+                    type="password"
+                    placeholder="escribe el password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                {/* el onChange captura el evento ya que es cualquier cosa que cambie el estado inicial que en este caso es null */}
+                <button onClick={handleClick}> Login</button>
             </div >
-
         </div >
     );
 };
+
+// Condicional de nulidad e indefinido (token && token != "" && token != undefined)
